@@ -30,3 +30,6 @@
 *.vrb
 *.xdy
 *.tdo
+*.bak
+*.glsdefs
+*.thm

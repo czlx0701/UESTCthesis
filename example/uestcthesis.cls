@@ -30,7 +30,9 @@
 \NeedsTeXFormat{LaTeX2e}[2011/06/27]
 \ProvidesClass{uestcthesis}
     [2014/03/13 v1.0.1 UESTC thesis class]
-\LoadClass[cs4size,UTF8,fancyhdr,hyperref,fntef,openany]{ctexbook}[2011/03/11]
+%\LoadClass[cs4size,UTF8,fancyhdr,hyperref,fntef,openany]{ctexbook}[2011/03/11]
+\RequirePackage[T1]{fontenc}
+\LoadClass[cs4size,fancyhdr,hyperref,fntef]{ctexbookutf8}
 \RequirePackage{mathptmx}
 \DeclareSymbolFont{symbols} {OMS}{cmsy}{m}{n}
 \DeclareSymbolFont{largesymbols}{OMX}{cmex}{m}{n}
@@ -39,7 +41,7 @@
 \SetSymbolFont{operators}{bold}{OT1}{cmr} {bx}{n}
 \SetSymbolFont{letters} {bold}{OML}{cmm} {b}{it}
 \SetSymbolFont{symbols} {bold}{OMS}{cmsy}{b}{n}
-\renewcommand{\ttfamily}{\CTEX@save@ttfamily \CJKfamily {\CTEX@rm@family }}
+%\renewcommand{\ttfamily}{\CTEX@save@ttfamily \CJKfamily {\CTEX@rm@family }}
 \RequirePackage{etoolbox}[2011/01/03]
 \RequirePackage{ifthen}
 \newcommand{\bachelor@uestcthesis}{
@@ -102,7 +104,7 @@
             ]{chapter}
             }
 \newcommand{\chaptermarkfix@uestcthesis}{
-\renewcommand{\chaptermark}[1]{\markboth{第\chapternumberformat@uestcthesis章~##1 }{}}
+\renewcommand{\chaptermark}[1]{\markboth{第\chapternumberformat@uestcthesis{}章~##1 }{}}
 }
 \newcommand{\acknowledgementsname@uestcthesis}{致\enspace 谢}
 \newcommand{\glossaryname@uestcthesis}{主要符号表}
@@ -2938,7 +2940,7 @@
 {\zihao{3}学\qquad 号~}\makebox[20em][c]{\uline{\hfill\@stuid\hfill}}\\[5mm]
 {\zihao{3}专\qquad 业~}\makebox[20em][c]{\uline{\hfill\@major\hfill}}\\[5mm]
 {\zihao{3}学\qquad 院~}\makebox[20em][c]{\uline{\hfill\@school\hfill}}\\[5mm]
-{\zihao{3}指导教师~}\makebox[20em][c]{\uline{\hfill\@advisername\hfill}}\\[5mm]
+{\zihao{3}指导教师~}\makebox[20em][c]{\uline{\hfill\@advisername\quad\hfill}}\\[5mm]
 {\zihao{3}指导单位~}\makebox[20em][c]{\uline{\hfill\@university\hfill}}\\[5mm]
 {\zihao{3}\@date}
 \end{center}
@@ -3018,7 +3020,7 @@
 {\zihao{3}学科专业~}\makebox[20em][c]{\zihao{3}\uline{\hfill\@major\hfill}}\\[5mm]
 {\zihao{3}学\qquad 号~}\makebox[20em][c]{\zihao{3}\uline{\hfill\@stuid\hfill}}\\[5mm]
 {\zihao{3}作者姓名~}\makebox[20em][c]{\zihao{3}\uline{\hfill\@author\hfill}}\\[5mm]
-{\zihao{3}指导教师~}\makebox[20em][c]{\zihao{3}\uline{\hfill\@advisername\hfill}}\\[5mm]
+{\zihao{3}指导教师~}\makebox[20em][c]{\zihao{3}\uline{\hfill\@advisername\quad\@advisertitle\hfill}}\\[5mm]
 \end{center}
 \clearpage{\pagestyle{empty}\cleardoublepage}
 }
@@ -3434,7 +3436,7 @@ pdfkeywords={\@pdfckeywords}%在pdf元信息中加入关键字
 \chapter*{\bf ABSTRACT}%插入不带章号的ABSTRACT
 }
 {\\[3mm]%摘要后换行空出3mm
-{\bf Keywords:\nbs}\parbox[t]{367.97586pt}{\@ekeywords}%插入关键词
+{\bf Keywords:}\parbox[t]{367.97586pt}{\@ekeywords}%插入关键词
 }
 \CTEXoptions[contentsname={\protect\heiti\protect\zihao{-3}目\enspace 录}]
 \setcounter{tocdepth}{3}
@@ -3517,7 +3519,7 @@ pdfkeywords={\@pdfckeywords}%在pdf元信息中加入关键字
  \fi \fi \fi \footnotelayout #1\ifFN@hangfoot \par \egroup \fi}
 \RequirePackage{cmap}%pdflatex编译时，可以生成可复制、粘贴的中文PDF文档
 \RequirePackage{hyperxmp}%在pdf中加入XMP高级元信息
-\RequirePackage[pdftex,unicode,
+\RequirePackage[unicode,
             bookmarksnumbered=true,
             bookmarksopen=true,
             hidelinks=true,
@@ -3588,7 +3590,7 @@ pdfpagelayout={TwoPageRight}
 
 
 \AtBeginDocument{%插入到论文内容的最前面。
-\begin{CJK}{UTF8}{rm}%中文支持环境，此处内容不受ctexbook文类影响，所以必须手动加这个环境。
+%\begin{CJK}{UTF8}{rm}%中文支持环境，此处内容不受ctexbook文类影响，所以必须手动加这个环境。
 \ifdef{\withoutforepages@uestcthesis}{}{%withoutforepages选项效果
 \maketitle%生成并插入封面
 }%
@@ -3597,7 +3599,7 @@ pdfpagelayout={TwoPageRight}
 \pdfbookmark[1]{摘要}{Cabstract}%添加中文摘要的PDF书签
 \include{contents/Cabstract}%插入中文摘要
 \clearpage{\pagestyle{empty}\cleardoublepage}
-\Eabstractmatter%设置英文摘要版式
+%\matter%设置英文摘要版式
 \pdfbookmark[1]{Abstract}{Eabstract}%添加英文摘要的PDF书签
 \include{contents/Eabstract}%插入英文摘要
 \clearpage{\pagestyle{empty}\cleardoublepage}
@@ -3615,7 +3617,7 @@ pdfpagelayout={TwoPageRight}
 \clearpage{\pagestyle{empty}\cleardoublepage}
 \mainmatter%修正主要符号表版式，这里是受目录版式的影响，必须在此加入\mainmatter。
 }%
-\end{CJK}
+%\end{CJK}
 \mainmatter%正文区版式
 \makeatletter
 \newcmds@uestcthesis%自定义图表命令，这些命令必须在document环境里声明才能在正文中使用，所以只能放在这里了。
@@ -3643,7 +3645,7 @@ pdfpagelayout={TwoPageRight}
 }
 }
 \AtEndDocument{%插入到论文内容最后面。
-\begin{CJK}{UTF8}{rm}
+%\begin{CJK}{UTF8}{rm}
 \ifdefstring{\degree@uestcthesis}{bachelor}{%检测是否为本科论文，调换参考文献与致谢的顺序
 \insertreference
 \newpage
@@ -3723,7 +3725,8 @@ pdfpagelayout={TwoPageRight}
 }}{}
 }
 }
-\clearpage\end{CJK}}
+%\clearpage\end{CJK}
+}
 }%这是大括号是前面onlychapters选项的ifdef命令的一部分。
 
 \endinput
